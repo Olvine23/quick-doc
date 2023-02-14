@@ -70,46 +70,16 @@ class HomeTab extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
+
+            SizedBox(
+              height: 20,
+            ),
             UserIntro(),
             SizedBox(
               height: 10,
             ),
             SearchInput(),
-            // ValueListenableBuilder(
-            //   valueListenable: Hive.box<Books>('booksBox').listenable(),
-            //   builder: ((context, Box<Books> books, _) {
-            //     if (books.values.isEmpty) {
-            //       return Text("0 pills");
-            //     } else {
-            //       return Column(
-            //         children: [
-            //           Text("${books.values.length} left"),
-            //           ListView.builder(
-            //               shrinkWrap: true,
-            //               itemCount: 1,
-            //               itemBuilder: ((context, index) {
-            //                 var res = books.getAt(0);
-            //                 String formattedDate =
-            //                     DateFormat(' EEEE dd MMM yyyy')
-            //                         .format(res!.date as DateTime);
-            //                 // var date_seen =
-            //                 //     DateFormat('dd MMM yyyy').format();
-            //                 return Column(
-            //                   mainAxisAlignment: MainAxisAlignment.end,
-            //                   children: [
-            //                     Text(res!.doc.toString()),
-            //                     Text(formattedDate),
-            //                     Text(res.title!),
-            //                     Text(res.author!),
-            //                     Text(res.quantity.toString())
-            //                   ],
-            //                 );
-            //               }))
-            //         ],
-            //       );
-            //     }
-            //   }),
-            // ),
+
             SizedBox(
               height: 20,
             ),
@@ -143,12 +113,16 @@ class HomeTab extends StatelessWidget {
             ),
 
             // SlideCard(onPressedScheduleCard: onPressedScheduleCard),
-            for (var doctor in doctors)
-              TopDoctorCard(
-                img: doctor['img'],
-                doctorName: doctor['doctorName'],
-                doctorTitle: doctor['doctorTitle'],
-              )
+            // ListView.builder(
+            //     shrinkWrap: true,
+            //     itemCount: doctors.length,
+            //     itemBuilder: ((context, index) {
+            //       return TopDoctorCard(
+            //           img: [index].,
+            //           doctorName: ['doctorName'][index],
+            //           doctorTitle: ['doctorTitle'][index]);
+            //     })),
+            TopDoctorCard()
           ],
         ),
       ),

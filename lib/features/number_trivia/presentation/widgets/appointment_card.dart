@@ -112,7 +112,6 @@ class AppointmentCard extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              
                             ],
                           ),
                           SizedBox(
@@ -153,8 +152,11 @@ class AppointmentCard extends StatelessWidget {
           );
         } else
           return Center(
-            child: Lottie.network(
-                'https://assets3.lottiefiles.com/packages/lf20_fmieo0wt.json'),
+            child: SizedBox(
+              height: 290,
+              child: Lottie.network(
+                  'https://assets3.lottiefiles.com/packages/lf20_fmieo0wt.json'),
+            ),
           );
       },
     );

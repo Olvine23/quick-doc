@@ -1,4 +1,4 @@
-class CustomColors{
+class CustomColors {
   static int header01 = 0xff151a56;
   static int primary = 0xff575de3;
   static int purple01 = 0xff918fa5;
@@ -12,5 +12,4 @@ class CustomColors{
   static int text01 = 0xffbec2fc;
   static int grey01 = 0xffe9ebf0;
   static int grey02 = 0xff9796af;
-
 }

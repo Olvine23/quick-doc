@@ -5,7 +5,9 @@ import 'package:test/features/number_trivia/presentation/widgets/appointment_car
 import 'package:test/features/number_trivia/presentation/widgets/top_doctor.dart';
 
 class DoctorDetail extends StatelessWidget {
-  const DoctorDetail({super.key});
+  final String name;
+  final String about;
+  const DoctorDetail({super.key, required this.name, required this.about});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +21,7 @@ class DoctorDetail extends StatelessWidget {
               height: size.height,
               width: double.infinity,
               child: Column(
-                children: [
-                  TopDoctorCard(
-                      img: 'assets/images/black_doc.png',
-                      doctorName: "Dr. Mark",
-                      doctorTitle: "Gene")
-                ],
+                children: [Text(name), Text(about)],
               ),
             ),
           ),

@@ -6,5 +6,5 @@ import '../pages/screens/detail_screen.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
   '/': (context) => AuthPage(),
-  '/detail': (context) => DoctorDetail(),
+  
 };
