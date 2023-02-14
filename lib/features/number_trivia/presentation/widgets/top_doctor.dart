@@ -15,7 +15,7 @@ class TopDoctorCard extends StatelessWidget {
         "George",
         'assets/images/vid.png',
         'Kasuku',
-        0791591040,
+        254791591040,
         'A doctor profile typically includes information such as the doctors name, photo, education and training background, specialties, and any additional certifications or awards. It may also provide details about the doctors practice, such as the types of patients they see, the services they offer, and the location of their practice. A doctor profile may be available on the doctors website, on a hospital or clinics website, or on a medical directory website. It serves as a useful tool for patients who are looking for a doctor who can meet their specific medical needs.'));
     doctors.add(Doc(
         'Kamau',
@@ -41,6 +41,7 @@ class TopDoctorCard extends StatelessWidget {
                   return DoctorDetail(
                     name: doctors[index].firstName,
                     about: doctors[index].about,
+                    phone: doctors[index].phone,
                   );
                 }));
               },
