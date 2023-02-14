@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "958270747980",
+    "project_id": "olvines-2acbb",
+    "storage_bucket": "olvines-2acbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958270747980:android:24c92ec8f68f44022e8be9",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958270747980-c59aq8cri3t39kg29mg13818jv28c34c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIgOYb4NQoqRHAtGhXU8zO0rr21mxCV2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958270747980-c59aq8cri3t39kg29mg13818jv28c34c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "958270747980-raqd980nqskca2eje74n72b25p9lqck7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
