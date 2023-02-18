@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class ImageTile extends StatelessWidget {
   final String imagePath;
   final Function()? onTap;
-  const ImageTile({super.key, required this.imagePath,required this.onTap});
+  const ImageTile({super.key, required this.imagePath, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,11 @@ class ImageTile extends StatelessWidget {
         padding: EdgeInsets.all(6.sp),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: Colors.grey[200],
+            color: Colors.transparent,
             border: Border.all(color: Colors.white)),
         child: Image.asset(
           imagePath,
-          height: 6.h,
+          height: 5.h,
         ),
       ),
     );

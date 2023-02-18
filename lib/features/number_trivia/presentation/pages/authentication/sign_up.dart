@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lottie/lottie.dart';
+import 'package:test/core/styles/colors.dart';
 import 'package:test/features/authentication/auth_service.dart';
 import 'package:test/features/number_trivia/presentation/components/auth_button.dart';
 import 'package:test/features/number_trivia/presentation/components/img_tile.dart';
 import 'package:test/features/number_trivia/presentation/components/mytextfield.dart';
 import 'package:sizer/sizer.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
-import 'package:test/features/number_trivia/presentation/pages/welcome/welcome.dart';
+ 
 
 class Register extends StatefulWidget {
   final Function()? onTap;
@@ -37,9 +39,23 @@ class _RegisterState extends State<Register> {
         }));
     try {
       if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim());
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim());
+
+        User? user = userCredential.user;
+        if (user != null) {
+          // ignore: deprecated_member_use
+          await user.updateProfile(displayName: nameController.text);
+        }
+        showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Hurray"),
+          );
+        });
 
         Navigator.pop(context);
       } else {
@@ -108,6 +124,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -121,13 +138,18 @@ class _RegisterState extends State<Register> {
                 children: <Widget>[
                   Container(
                     height: size.height,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://cdn.pixabay.com/photo/2020/08/03/09/39/medical-5459630__340.png'),
-                      ),
+                    child: Lottie.network(
+                      'https://assets6.lottiefiles.com/packages/lf20_kdCeeh2u4M.json',
+                      repeat: false,
                     ),
+
+                    // decoration: BoxDecoration(
+                    //   image: DecorationImage(
+                    //     fit: BoxFit.cover,
+                    //     image: NetworkImage(
+                    //         'https://cdn.pixabay.com/photo/2020/08/03/09/39/medical-5459630__340.png'),
+                    //   ),
+                    // ),
                   ),
                   // Rating Box
 
@@ -135,16 +157,10 @@ class _RegisterState extends State<Register> {
                 ],
               ),
             ),
-            SizedBox(height: 2.h),
-            Text(
-              "Lets get started with an account",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            SizedBox(height: 1.h),
             MyTextField(
               controller: nameController,
               hintText: 'Enter name',
-              obsCureText: true,
+              obsCureText: false,
             ),
             SizedBox(height: 1.h),
             MyTextField(
@@ -165,20 +181,27 @@ class _RegisterState extends State<Register> {
               obsCureText: true,
             ),
             SizedBox(height: 1.h),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
-              child: Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(color: Colors.grey[700]),
-                  )),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(CustomColors.primary),
+                  minimumSize: const Size.fromHeight(50), // NEW
+                ),
+                onPressed: signIn,
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
-            SizedBox(height: 1.h),
-            AuthButton(
-              onTap: signIn,
-              authText: 'Sign Up',
-            ),
+            // AuthButton(
+            //   onTap: signIn,
+            //   authText: 'Sign Up',
+            // ),
             SizedBox(height: 2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),

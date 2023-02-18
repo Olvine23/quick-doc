@@ -70,10 +70,6 @@ class HomeTab extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-
-            SizedBox(
-              height: 20,
-            ),
             UserIntro(),
             SizedBox(
               height: 10,

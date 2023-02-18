@@ -32,16 +32,16 @@ dependencies:
   flutter:
     sdk: flutter
   awesome_notifications:
-  get_it:
+  
   lottie:
-  curved_navigation_bar:
+  firebase_storage:
   google_fonts:
   flutter_bloc:
   liquid_pull_to_refresh:
   url_launcher:
   equatable:
   dartz:
-   
+  cloud_firestore:
   connectivity:
   calendar_view:
   syncfusion_flutter_calendar:

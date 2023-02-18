@@ -42,6 +42,7 @@ class TopDoctorCard extends StatelessWidget {
                     name: doctors[index].firstName,
                     about: doctors[index].about,
                     phone: doctors[index].phone,
+                    img: doctors[index].image,
                   );
                 }));
               },

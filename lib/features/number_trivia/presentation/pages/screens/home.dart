@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:test/core/styles/colors.dart';
+import 'package:test/core/utils/colors.dart';
 import 'package:test/features/number_trivia/presentation/components/pop_up_scope.dart';
 import 'package:test/features/number_trivia/presentation/components/tabs/home_tab.dart';
 import 'package:test/features/number_trivia/presentation/components/tabs/schedule_tab.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/chat_screen.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/my_details.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
 
@@ -17,12 +20,16 @@ class Home extends StatefulWidget {
 }
 
 List<Map> navigationBarItems = [
-  {'icon': Icons.local_hospital, 'index': 0},
-  {'icon': Icons.add, 'index': 1},
-  {'icon': Icons.calendar_today, 'index': 2},
+  {'icon': Icons.home, 'index': 0},
+  {'icon': Icons.calendar_today, 'index': 1},
+  {'icon': Icons.chat_bubble_rounded, 'index': 2},
+  {'icon': Icons.person, 'index': 3}
 ];
 
 class _HomeState extends State<Home> {
+  var phone = 0;
+  var name = "John Doe";
+  var company = "MMUST";
   int _selectedIndex = 0;
   Future<bool> _onWillPop() async {
     return (await showDialog(
@@ -52,7 +59,12 @@ class _HomeState extends State<Home> {
         onPressedScheduleCard: goToSchedule,
       ),
       MyBooks(),
-      ScheduleTab(),
+      Chat_Screen(
+        company: company,
+        name: name,
+        phone: 0,
+      ),
+      MyDetals(),
     ];
 
     return WillPopScope(
@@ -68,14 +80,14 @@ class _HomeState extends State<Home> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedFontSize: 30,
-          selectedItemColor: Color(CustomColors.primary),
+          selectedItemColor: iconColor,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: [
             for (var navigationBarItem in navigationBarItems)
               BottomNavigationBarItem(
                 icon: Container(
-                  height: 55,
+                  height: 20,
                   decoration: BoxDecoration(
                     border: Border(
                       top: _selectedIndex == navigationBarItem['index']
@@ -86,10 +98,10 @@ class _HomeState extends State<Home> {
                   ),
                   child: Icon(
                     navigationBarItem['icon'],
-                    size: 30,
+                    // size: _selectedIndex == 0 ? 20 : 30,
                     color: _selectedIndex == 0
                         ? Color(CustomColors.bg01)
-                        : Color(CustomColors.bg02),
+                        : iconColor,
                   ),
                 ),
                 label: '',

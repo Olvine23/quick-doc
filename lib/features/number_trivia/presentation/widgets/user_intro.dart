@@ -26,6 +26,22 @@ class UserIntro extends StatelessWidget {
             ),
           ],
         ),
+        Row(
+          children: [
+            user!.photoURL != null
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(user!.photoURL!),
+                  )
+                : CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/vid.png'),
+                  ),
+            SizedBox(
+              width: 10,
+            ),
+            Icon(Icons.notifications_outlined, size: 30)
+          ],
+        ),
+        // Icon(Icons.notifications_outlined, size: 30)
         // CircleAvatar(
         //   backgroundImage: NetworkImage(user!.photoURL!),
         // )

@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:test/core/styles/colors.dart';
 import 'package:test/features/authentication/auth_service.dart';
 import 'package:test/features/number_trivia/presentation/components/auth_button.dart';
 import 'package:test/features/number_trivia/presentation/components/img_tile.dart';
 import 'package:test/features/number_trivia/presentation/components/mytextfield.dart';
 import 'package:sizer/sizer.dart';
+import 'package:lottie/lottie.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
-import 'package:test/features/number_trivia/presentation/pages/welcome/welcome.dart';
+ 
 
 class Login extends StatefulWidget {
   final Function()? onTap;
@@ -22,7 +24,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   final passwordController = TextEditingController();
 
   String formText = 'teeett';
@@ -102,29 +104,34 @@ class _LoginState extends State<Login> {
             Container(
               // 40% of our total height
               height: size.height * 0.4,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: size.height,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://cdn.pixabay.com/photo/2020/08/03/09/39/medical-5459631_960_720.png'),
-                      ),
+              child: Form(
+                key: _formKey,
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      height: size.height,
+                      child: Lottie.network(
+                          'https://assets6.lottiefiles.com/private_files/lf30_fw6h59eu.json'),
+                      // decoration: BoxDecoration(
+                      //   image: DecorationImage(
+                      //     fit: BoxFit.cover,
+                      //     image: NetworkImage(
+                      //         'https://cdn.pixabay.com/photo/2020/08/03/09/39/medical-5459631_960_720.png'),
+                      //   ),
+                      // ),
                     ),
-                  ),
-                  // Rating Box
+                    // Rating Box
 
-                  // Back Button
-                ],
+                    // Back Button
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 2.h),
-            Text(
-              "Hey Champ, we are glad you are back",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
+
+            // Text(
+            //   "Hey Champ, we are glad you are back",
+            //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            // ),
             SizedBox(height: 1.h),
             MyTextField(
               hintText: 'Email Address',
@@ -144,14 +151,33 @@ class _LoginState extends State<Login> {
                   alignment: Alignment.topRight,
                   child: Text(
                     "Forgot Password?",
-                    style: TextStyle(color: Colors.grey[700]),
+                    style: TextStyle(
+                        color: Color(CustomColors.primary),
+                        fontWeight: FontWeight.bold),
                   )),
             ),
             SizedBox(height: 1.h),
-            AuthButton(
-              onTap: signIn,
-              authText: 'Sign In',
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(CustomColors.primary),
+                  minimumSize: const Size.fromHeight(50), // NEW
+                ),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    signIn();
+                  }
+                },
+                child: const Text(
+                  'Sign in',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ), 
+              ),
             ),
+
             SizedBox(height: 2.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),

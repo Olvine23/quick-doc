@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:test/core/styles/colors.dart';
+import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
 
 import '../components/tabs/home_tab.dart';
 import '../pages/schedule/models/books.dart';
@@ -151,11 +152,18 @@ class AppointmentCard extends StatelessWidget {
             ],
           );
         } else
-          return Center(
-            child: SizedBox(
-              height: 290,
-              child: Lottie.network(
-                  'https://assets3.lottiefiles.com/packages/lf20_fmieo0wt.json'),
+          return InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return MyBooks();
+              })));
+            },
+            child: Center(
+              child: SizedBox(
+                height: 290,
+                child: Lottie.network(
+                    'https://assets3.lottiefiles.com/packages/lf20_fmieo0wt.json'),
+              ),
             ),
           );
       },
