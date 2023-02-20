@@ -39,12 +39,7 @@ class _HomeState extends State<Home> {
         false;
   }
 
-  void sign_out() async {
-    AlertDialog(
-      content: Text("Sign out"),
-    );
-    await FirebaseAuth.instance.signOut();
-  }
+ 
 
   void goToSchedule() {
     setState(() {

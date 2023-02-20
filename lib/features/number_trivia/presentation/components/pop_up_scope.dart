@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -20,7 +21,7 @@ class LeaveAppDialog extends StatelessWidget {
         ElevatedButton(
           child: Text("Yes"),
           onPressed: () {
-            Navigator.of(context).pop(true);
+            SystemNavigator.pop();
           },
         ),
       ],

@@ -13,6 +13,9 @@ class InfoUser extends StatelessWidget {
   Widget build(BuildContext context) {
     print(users.length);
     return Scaffold(
+      appBar: AppBar(
+        leading:Icon(Icons.medical_information),
+        title: Text("Doctors"),),
       body: StreamBuilder<QuerySnapshot>(
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {

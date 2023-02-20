@@ -44,7 +44,7 @@ class _MyDetalsState extends State<MyDetals> {
                 if (snapshot.connectionState == ConnectionState.active) {
                   User? user = snapshot.data;
                   if (user != null) {
-                    return Text("Signed in as ${user!.displayName}");
+                    return Text("Signed in as ${user.displayName}");
                   } else
                     return Text("None");
                 }

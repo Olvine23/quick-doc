@@ -32,7 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   awesome_notifications:
-  
+  smooth_page_indicator:
   lottie:
   firebase_storage:
   google_fonts:

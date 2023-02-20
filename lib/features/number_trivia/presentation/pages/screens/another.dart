@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
-import 'package:test/features/number_trivia/presentation/components/streams/stream.dart';
+import 'package:test/features/number_trivia/streams/stream.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '';
 

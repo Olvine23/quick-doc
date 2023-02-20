@@ -12,7 +12,6 @@ import 'package:test/features/number_trivia/presentation/components/mytextfield.
 import 'package:sizer/sizer.dart';
 import 'package:lottie/lottie.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
- 
 
 class Login extends StatefulWidget {
   final Function()? onTap;
@@ -133,6 +132,17 @@ class _LoginState extends State<Login> {
             //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             // ),
             SizedBox(height: 1.h),
+            Text("QuickDoc",
+                style: TextStyle(
+                    color: Color(CustomColors.primary),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    fontStyle: FontStyle.italic)),
+            SizedBox(height: 1.h),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("email"),
+            ),
             MyTextField(
               hintText: 'Email Address',
               controller: emailController,
@@ -174,7 +184,7 @@ class _LoginState extends State<Login> {
                   style: TextStyle(
                     fontSize: 16,
                   ),
-                ), 
+                ),
               ),
             ),
 
