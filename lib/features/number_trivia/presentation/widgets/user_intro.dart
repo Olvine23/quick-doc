@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/core/styles/styles.dart';
 
 import '../components/tabs/home_tab.dart';
 
@@ -20,10 +21,7 @@ class UserIntro extends StatelessWidget {
               'Hello',
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            Text(
-              '${user!.displayName} 👋',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
+            Text('${user!.displayName} 👋', style: kHeadStyle),
           ],
         ),
         Row(

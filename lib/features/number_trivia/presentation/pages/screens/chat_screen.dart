@@ -70,7 +70,7 @@ class _Chat_ScreenState extends State<Chat_Screen> {
                   nameController.clear();
                   phoneController.clear();
                   companyController.clear();
-                  Navigator.pop(context);
+                   
                 },
                 child: Text("Add")),
             ElevatedButton(

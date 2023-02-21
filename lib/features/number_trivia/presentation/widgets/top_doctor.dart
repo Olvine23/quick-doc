@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
 import 'package:test/core/utils/colors.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/chat_screen.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/detail_screen.dart';
 
 import '../models/doctor.dart';
@@ -8,8 +9,11 @@ import '../models/doctor.dart';
 class TopDoctorCard extends StatelessWidget {
   List<Doc> doctors = <Doc>[];
 
+  List<Chat_Screen> members = <Chat_Screen>[];
+
   @override
   Widget build(BuildContext context) {
+    members.add(Chat_Screen(name: "Olly", phone: 033, company: "MMuSR"));
     doctors.add(Doc(
         'Olvine',
         "George",
@@ -28,6 +32,7 @@ class TopDoctorCard extends StatelessWidget {
     doctors.add(Doc('Prisca', "Atienos", 'assets/images/prisca.jpg', 'USIU', 6,
         'A doctor profile typically includes information such as the doctors name, photo, education and training background, specialties, and any additional certifications or awards. It may also provide details about the doctors practice, such as the types of patients they see, the services they offer, and the location of their practice. A doctor profile may be available on the doctors website, on a hospital or clinics website, or on a medical directory website. It serves as a useful tool for patients who are looking for a doctor who can meet their specific medical needs.'));
     print(doctors.length);
+    print(members.length);
     return ListView.builder(
         shrinkWrap: true,
         physics: ScrollPhysics(),
@@ -48,11 +53,13 @@ class TopDoctorCard extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  Container(
-                    color: Color(CustomColors.grey01),
-                    child: Image(
-                      width: 100,
-                      image: AssetImage(doctors[index].image),
+                  Expanded(
+                    child: Container(
+                      color: Color(CustomColors.grey01),
+                      child: Image(
+                        width: 100,
+                        image: AssetImage(doctors[index].image),
+                      ),
                     ),
                   ),
                   SizedBox(

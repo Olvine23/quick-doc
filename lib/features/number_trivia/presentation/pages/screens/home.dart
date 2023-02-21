@@ -9,6 +9,7 @@ import 'package:test/features/number_trivia/presentation/components/tabs/home_ta
 import 'package:test/features/number_trivia/presentation/components/tabs/schedule_tab.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/chat_screen.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/my_details.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/user_screen.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
 
@@ -39,8 +40,6 @@ class _HomeState extends State<Home> {
         false;
   }
 
- 
-
   void goToSchedule() {
     setState(() {
       _selectedIndex = 1;
@@ -54,11 +53,7 @@ class _HomeState extends State<Home> {
         onPressedScheduleCard: goToSchedule,
       ),
       MyBooks(),
-      Chat_Screen(
-        company: company,
-        name: name,
-        phone: 0,
-      ),
+      InfoUser(),
       MyDetals(),
     ];
 

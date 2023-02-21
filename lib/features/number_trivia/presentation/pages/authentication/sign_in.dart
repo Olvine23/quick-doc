@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:test/core/styles/colors.dart';
+import 'package:test/core/styles/styles.dart';
 import 'package:test/features/authentication/auth_service.dart';
 import 'package:test/features/number_trivia/presentation/components/auth_button.dart';
 import 'package:test/features/number_trivia/presentation/components/img_tile.dart';
@@ -132,17 +133,9 @@ class _LoginState extends State<Login> {
             //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             // ),
             SizedBox(height: 1.h),
-            Text("QuickDoc",
-                style: TextStyle(
-                    color: Color(CustomColors.primary),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    fontStyle: FontStyle.italic)),
+            Text("QuickDoc", style: kHeadStyle),
             SizedBox(height: 1.h),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text("email"),
-            ),
+
             MyTextField(
               hintText: 'Email Address',
               controller: emailController,
