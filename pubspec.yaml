@@ -34,9 +34,10 @@ dependencies:
   awesome_notifications:
   smooth_page_indicator:
   google_maps_webservice:
+  geocoding:
   lottie:
   google_maps_flutter:
-  geolocation:
+  geolocator:
   firebase_storage:
   google_fonts:
   flutter_bloc:
@@ -63,6 +64,7 @@ dependencies:
   latlong2:
   flutter_map:
   flash:
+  location:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

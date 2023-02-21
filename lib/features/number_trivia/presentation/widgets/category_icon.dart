@@ -1,7 +1,10 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/another.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/hospitals/hospital_screen.dart';
 
 import '../pages/welcome/my_books.dart';
 
@@ -76,7 +79,7 @@ class CategoryIcon extends StatelessWidget {
             }));
           } else if (text == "Hospital") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return TestLaunch();
+              return HospitalScreen();
             }));
           }
         },

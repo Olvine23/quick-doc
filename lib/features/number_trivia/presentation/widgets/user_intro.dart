@@ -28,7 +28,7 @@ class UserIntro extends StatelessWidget {
           children: [
             user!.photoURL != null
                 ? CircleAvatar(
-                    backgroundImage: NetworkImage(user!.photoURL!),
+                    backgroundImage: AssetImage('assets/images/vid.png'),
                   )
                 : CircleAvatar(
                     backgroundImage: AssetImage('assets/images/vid.png'),

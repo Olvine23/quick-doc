@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
 
-class SearchInput extends StatelessWidget {
-  const SearchInput({
+class SearchInput extends StatefulWidget {
+   String? text;
+   SearchInput({
     Key? key,
+    this.text,
   }) : super(key: key);
 
   @override
+  State<SearchInput> createState() => _SearchInputState();
+}
+
+class _SearchInputState extends State<SearchInput> {
+  @override
   Widget build(BuildContext context) {
+   
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -32,7 +40,7 @@ class SearchInput extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: 'Search a doctor or health issue',
+                hintText: widget.text,
                 hintStyle: TextStyle(
                     fontSize: 13,
                     color: Color(CustomColors.purple01),

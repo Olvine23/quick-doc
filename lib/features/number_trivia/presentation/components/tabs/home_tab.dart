@@ -74,7 +74,9 @@ class HomeTab extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            SearchInput(),
+            SearchInput(
+              text: "Search a doctor or health issue",
+            ),
 
             SizedBox(
               height: 20,

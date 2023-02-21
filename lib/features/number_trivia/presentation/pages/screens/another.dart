@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/hospitals/hospital_screen.dart';
 import 'package:test/features/number_trivia/streams/stream.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '';
@@ -87,6 +88,14 @@ class _TestLaunchState extends State<TestLaunch> {
                   if (!await launch(call)) {
                     throw 'Could not launch $call';
                   }
+                },
+                child: Text("Call Dan")),
+            ElevatedButton(
+                onPressed: () async {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) {
+                    return HospitalScreen();
+                  })));
                 },
                 child: Text("Call Dan")),
             Text(date),
