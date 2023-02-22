@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test/core/styles/styles.dart';
-import 'package:test/core/utils/colors.dart';
 import 'package:test/features/number_trivia/presentation/widgets/search_input.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +26,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
   static final LatLng _kMapCenter = LatLng(0.2699067, 34.7244183);
 
   static final CameraPosition _kInitialPosition =
-      CameraPosition(target: _kMapCenter, zoom: 11.0, tilt: 0, bearing: 0);
+      CameraPosition(target: _kMapCenter, zoom: 15.0, tilt: 0, bearing: 0);
 
   Future<void> _getLocation() async {
     currentLocation = await Geolocator.getCurrentPosition(
@@ -47,6 +46,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
     setState(() {
       hospitals = data['results'];
     });
+
     _addMarkers();
   }
 
@@ -63,6 +63,62 @@ class _HospitalScreenState extends State<HospitalScreen> {
         infoWindow: InfoWindow(
           title: hospital['name'],
           snippet: hospital['vicinity'],
+          onTap: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(hospital['name'], style: kTitleStyle),
+                        if (hospital['rating'] <= 1.9)
+                          Icon(Icons.star)
+                        else if (hospital['rating'] <= 2.9)
+                          Row(children: [Icon(Icons.star), Icon(Icons.star)])
+                        else if (hospital['rating'] <= 3.9)
+                          Row(children: [
+                            Icon(Icons.star, color: Colors.yellow,),
+                            Icon(Icons.star,color: Colors.yellow,),
+                            Icon(Icons.star, color: Colors.yellow,)
+                          ])else if (hospital['rating'] <= 4.9) Row(children: [
+                            Icon(Icons.star, color: Colors.yellow,),
+                            Icon(Icons.star, color: Colors.yellow,),
+                            Icon(Icons.star,color: Colors.yellow,),
+                            Icon(Icons.star, color: Colors.yellow,),
+                          ])else if (hospital['rating'] <= 5) Row(children: [
+                            Icon(Icons.star, color: Colors.yellow,),
+                            Icon(Icons.star, color: Colors.yellow,),
+                            Icon(Icons.star, color: Colors.yellow,),
+                            Icon(Icons.star,color: Colors.yellow,),
+                            Icon(Icons.star, color: Colors.yellow,)
+                          ]),
+                        Text(hospital['rating'].toString()),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                             
+                            Text('${hospital['types'][0]}, '),
+                            Text('${hospital['types'][1]}'),
+                            Text('${hospital['types'][2]}'),
+                            Text('${hospital['types'][3]}'),
+                            
+                          ],
+                        ),
+                        Image.network(hospital['icon']),
+                        hospital['opening_hours']['open_now'] == true
+                            ? Text(
+                                "Open",
+                                style: TextStyle(color: Colors.green),
+                              )
+                            : Text("Closed"),
+                        Text(hospital['opening_hours']['open_now'].toString())
+                      ],
+                    ),
+                  );
+                });
+          },
         ),
       );
       markers[markerId] = marker;
@@ -105,10 +161,11 @@ class _HospitalScreenState extends State<HospitalScreen> {
     setState(() {
       _currentPosition = position;
       _markers.add(Marker(
-          markerId: MarkerId("Your Location",), 
+          markerId: MarkerId(
+            "Your Location",
+          ),
           position: LatLng(position.latitude, position.longitude),
           infoWindow: InfoWindow(title: "Your Location")));
-          
     });
   }
 
@@ -139,18 +196,10 @@ class _HospitalScreenState extends State<HospitalScreen> {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 10,
-          ),
-          SearchInput(
-            text: "Search for hospitals",
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          Text("Click  to view "),
           Expanded(
-            child: Container(
-              height: 400,
+            child: SizedBox(
+              height: 500,
               child: GoogleMap(
                 initialCameraPosition: _kInitialPosition,
                 myLocationEnabled: true,

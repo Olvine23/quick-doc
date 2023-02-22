@@ -2,25 +2,13 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:test/core/styles/colors.dart';
-import 'package:test/core/styles/styles.dart';
-import 'package:test/features/number_trivia/presentation/pages/schedule/models/books.dart';
-import 'package:test/features/number_trivia/presentation/pages/screens/another.dart';
-import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
-import 'package:test/features/number_trivia/presentation/providers/provider_file.dart';
 import 'package:test/features/number_trivia/presentation/widgets/category_icons.dart';
 import 'package:test/features/number_trivia/presentation/widgets/search_input.dart';
 import 'package:test/features/number_trivia/presentation/widgets/title_row.dart';
 import 'package:test/features/number_trivia/presentation/widgets/user_intro.dart';
-import 'package:intl/intl.dart';
-
 import '../../widgets/appointment_card.dart';
-import '../../widgets/slide_card.dart';
-import '../../widgets/top_doc.dart';
 import '../../widgets/top_doctor.dart';
 
 final user = FirebaseAuth.instance.currentUser;

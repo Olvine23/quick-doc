@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/another.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/hospitals/hospital_screen.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/pills/pills_page.dart';
 
 import '../pages/welcome/my_books.dart';
 
@@ -75,7 +76,7 @@ class CategoryIcon extends StatelessWidget {
         onTap: () {
           if (text == "Pill") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return MyBooks();
+              return PillsPage();
             }));
           } else if (text == "Hospital") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
