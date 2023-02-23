@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:test/core/styles/colors.dart';
 import 'package:test/core/styles/styles.dart';
 import 'package:test/features/number_trivia/presentation/widgets/search_input.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +19,7 @@ class HospitalScreen extends StatefulWidget {
 
 class _HospitalScreenState extends State<HospitalScreen> {
   List<dynamic> hospitals = [];
+  final Completer<GoogleMapController> _controller = Completer();
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   String? _currentAddress;
   Position? _currentPosition;
@@ -53,7 +57,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
   }
 
   void addCustomIcon() async {
-   await BitmapDescriptor.fromAssetImage(
+    await BitmapDescriptor.fromAssetImage(
             const ImageConfiguration(), "assets/hospital.png")
         .then(
       (icon) {
@@ -219,6 +223,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
     setState(() {
       _currentPosition = position;
       _markers.add(Marker(
+          icon: markerIcon,
           markerId: MarkerId(
             "Your Location",
           ),
@@ -251,16 +256,42 @@ class _HospitalScreenState extends State<HospitalScreen> {
     print(_currentPosition?.longitude);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Find Hospitals Near Me'),
+        title: Text('Hospitals Near Me'),
       ),
       body: Column(
         children: [
-          Text("Click  to view "),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AvatarGlow(
+                  glowColor: Colors.yellow,
+                  endRadius: 25,
+                  child: Icon(
+                    Icons.tips_and_updates,
+                    color: Colors.yellow,
+                  )),
+              Expanded(
+                child: Text(
+                  "Click on the hospital icon 🏥 for more details",
+                  style: kTitleStyle,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: SizedBox(
               height: 500,
               child: GoogleMap(
                 initialCameraPosition: _kInitialPosition,
+                onMapCreated: (mapController) {
+                  _controller.complete(mapController);
+                },
                 myLocationEnabled: true,
                 markers: Set<Marker>.of(markers.values),
               ),
