@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
   String? _currentAddress;
   Position? _currentPosition;
   LatLng? _center;
-
+  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
   late Position currentLocation;
   GoogleMapController? _mapController;
   final Set<Marker> _markers = {};
@@ -50,11 +52,24 @@ class _HospitalScreenState extends State<HospitalScreen> {
     _addMarkers();
   }
 
+  void addCustomIcon() async {
+   await BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(), "assets/hospital.png")
+        .then(
+      (icon) {
+        setState(() {
+          markerIcon = icon;
+        });
+      },
+    );
+  }
+
   void _addMarkers() {
     hospitals.asMap().forEach((index, hospital) {
       var markerIdVal = index.toString();
       final MarkerId markerId = MarkerId(markerIdVal);
       final Marker marker = Marker(
+        icon: markerIcon,
         markerId: markerId,
         position: LatLng(
           hospital['geometry']['location']['lat'],
@@ -69,52 +84,95 @@ class _HospitalScreenState extends State<HospitalScreen> {
                 builder: (context) {
                   return Container(
                     height: 200,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(hospital['name'], style: kTitleStyle),
-                        if (hospital['rating'] <= 1.9)
-                          Icon(Icons.star)
-                        else if (hospital['rating'] <= 2.9)
-                          Row(children: [Icon(Icons.star), Icon(Icons.star)])
-                        else if (hospital['rating'] <= 3.9)
-                          Row(children: [
-                            Icon(Icons.star, color: Colors.yellow,),
-                            Icon(Icons.star,color: Colors.yellow,),
-                            Icon(Icons.star, color: Colors.yellow,)
-                          ])else if (hospital['rating'] <= 4.9) Row(children: [
-                            Icon(Icons.star, color: Colors.yellow,),
-                            Icon(Icons.star, color: Colors.yellow,),
-                            Icon(Icons.star,color: Colors.yellow,),
-                            Icon(Icons.star, color: Colors.yellow,),
-                          ])else if (hospital['rating'] <= 5) Row(children: [
-                            Icon(Icons.star, color: Colors.yellow,),
-                            Icon(Icons.star, color: Colors.yellow,),
-                            Icon(Icons.star, color: Colors.yellow,),
-                            Icon(Icons.star,color: Colors.yellow,),
-                            Icon(Icons.star, color: Colors.yellow,)
-                          ]),
-                        Text(hospital['rating'].toString()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                             
-                            Text('${hospital['types'][0]}, '),
-                            Text('${hospital['types'][1]}'),
-                            Text('${hospital['types'][2]}'),
-                            Text('${hospital['types'][3]}'),
-                            
-                          ],
-                        ),
-                        Image.network(hospital['icon']),
-                        hospital['opening_hours']['open_now'] == true
-                            ? Text(
-                                "Open",
-                                style: TextStyle(color: Colors.green),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${hospital['name']} (${hospital['name']})',
+                              style: kHeadStyle),
+                          if (hospital['opening_hours']['open_now'] == true &&
+                              hospital['opening_hours'] != null)
+                            hospital['opening_hours']['open_now'] == true
+                                ? Text("Open", style: kTitleStyleWithColor)
+                                : Text(
+                                    "Closed",
+                                    style: TextStyle(
+                                        color: Colors.red, fontSize: 14),
+                                  )
+                          else
+                            Text("NA"),
+                          Text(hospital['business_status']),
+                          if (hospital['rating'] == null)
+                            Icon(Icons.star)
+                          else if (hospital['rating'] <= 1.9)
+                            Icon(Icons.star)
+                          else if (hospital['rating'] <= 2.9)
+                            Row(children: const [
+                              Icon(Icons.star),
+                              Icon(Icons.star)
+                            ])
+                          else if (hospital['rating'] <= 3.9)
+                            // ignore: prefer_const_literals_to_create_immutables
+                            Row(children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
                               )
-                            : Text("Closed"),
-                        Text(hospital['opening_hours']['open_now'].toString())
-                      ],
+                            ])
+                          else if (hospital['rating'] <= 4.9)
+                            Row(children: const [
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                            ])
+                          else if (hospital['rating'] <= 5)
+                            Row(children: const [
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              )
+                            ]),
+                          Text(hospital['rating'].toString()),
+                        ],
+                      ),
                     ),
                   );
                 });
@@ -184,6 +242,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
   void initState() {
     super.initState();
     _getLocation().then((value) => _getHospitals());
+    addCustomIcon();
   }
 
   @override
