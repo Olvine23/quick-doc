@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
 import 'package:test/core/styles/styles.dart';
+import 'package:test/features/number_trivia/presentation/pages/schedule/appointment_page.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
 
 class Title_row extends StatelessWidget {
@@ -27,7 +28,7 @@ class Title_row extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: ((context) {
-              return MyBooks();
+              return AppointmentPage();
             })));
           },
         )

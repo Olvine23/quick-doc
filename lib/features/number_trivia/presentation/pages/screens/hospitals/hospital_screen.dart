@@ -87,35 +87,48 @@ class _HospitalScreenState extends State<HospitalScreen> {
                 context: context,
                 builder: (context) {
                   return Container(
-                    height: 200,
+                    height: 150,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('${hospital['name']} (${hospital['name']})',
-                              style: kHeadStyle),
-                          if (hospital['opening_hours']['open_now'] == true &&
-                              hospital['opening_hours'] != null)
-                            hospital['opening_hours']['open_now'] == true
-                                ? Text("Open", style: kTitleStyleWithColor)
-                                : Text(
-                                    "Closed",
-                                    style: TextStyle(
-                                        color: Colors.red, fontSize: 14),
-                                  )
-                          else
-                            Text("NA"),
-                          Text(hospital['business_status']),
+                          Text('${hospital['name']}', style: kTitleStyle),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text('${hospital['vicinity']} ',
+                              style: kTitleStyleWithColor),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            hospital['business_status'],
+                            style: TextStyle(fontSize: 8),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
                           if (hospital['rating'] == null)
-                            Icon(Icons.star)
+                            Text(
+                              "Hospital facility has no rating",
+                              style: TextStyle(color: Colors.red, fontSize: 15),
+                            )
                           else if (hospital['rating'] <= 1.9)
                             Icon(Icons.star)
                           else if (hospital['rating'] <= 2.9)
-                            Row(children: const [
-                              Icon(Icons.star),
-                              Icon(Icons.star)
-                            ])
+                            Expanded(
+                              child: Row(children: const [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                )
+                              ]),
+                            )
                           else if (hospital['rating'] <= 3.9)
                             // ignore: prefer_const_literals_to_create_immutables
                             Row(children: [
@@ -174,7 +187,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
                                 color: Colors.yellow,
                               )
                             ]),
-                          Text(hospital['rating'].toString()),
+                          // Text(hospital['rating'].toString()),
                         ],
                       ),
                     ),

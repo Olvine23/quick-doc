@@ -7,11 +7,15 @@ import 'package:test/core/utils/colors.dart';
 import 'package:test/features/number_trivia/presentation/components/pop_up_scope.dart';
 import 'package:test/features/number_trivia/presentation/components/tabs/home_tab.dart';
 import 'package:test/features/number_trivia/presentation/components/tabs/schedule_tab.dart';
+import 'package:test/features/number_trivia/presentation/pages/schedule/appointment_page.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/chat_screen.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/doctors/doctors_screen.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/my_details.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/user_screen.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
+
+import 'ambulance/appointments_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -52,9 +56,10 @@ class _HomeState extends State<Home> {
       HomeTab(
         onPressedScheduleCard: goToSchedule,
       ),
-      MyBooks(),
+      DaktarisScreen(),
+      // Dummy(),
       InfoUser(),
-      MyDetals(),
+      AppointmentsPage()
     ];
 
     return WillPopScope(
