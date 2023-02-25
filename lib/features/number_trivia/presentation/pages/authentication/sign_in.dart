@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -12,6 +13,7 @@ import 'package:test/features/number_trivia/presentation/components/img_tile.dar
 import 'package:test/features/number_trivia/presentation/components/mytextfield.dart';
 import 'package:sizer/sizer.dart';
 import 'package:lottie/lottie.dart';
+import 'package:test/features/number_trivia/presentation/components/tabs/home_tab.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/dummy.dart';
 
 class Login extends StatefulWidget {
@@ -26,37 +28,57 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final passwordController = TextEditingController();
+  final CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('appusers');
+  @override
+  void dispose() {
+     
+    super.dispose();
+  }
 
   String formText = 'teeett';
   String password = '';
-
   void signIn() async {
     showDialog(
         context: context,
         builder: ((context) {
           return Center(child: CircularProgressIndicator());
         }));
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+    if (mounted) {
+      try {
+        var userapp = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim());
 
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      //wrong email
-      if (e.code == "user-not-found") {
-        Navigator.pop(context);
-        //show error to the user
-        wrongEmail();
-        print('No user found for that email.');
-      }
-      //wrong password
+        if (userapp != null) {
+          final user = userapp.user!;
+          final userData = {
+            'displayName': user.displayName,
+            'email': user.email,
+            'photoURL': user.photoURL
+          };
+          await usersCollection.doc(user.uid).set(userData);
+        }
+        if (mounted) {
+          Navigator.pop(context);
+        }
+         
+      } on FirebaseAuthException catch (e) {
+        //wrong email
+        if (e.code == "user-not-found") {
+          Navigator.pop(context);
+          //show error to the user
+          wrongEmail();
+          print('No user found for that email.');
+        }
+        //wrong password
 
-      else if (e.code == "wrong-password") {
-        Navigator.pop(context);
-        // show error to the user
-        wrongPassword();
-        print("Wrong password");
+        else if (e.code == "wrong-password") {
+          Navigator.pop(context);
+          // show error to the user
+          wrongPassword();
+          print("Wrong password");
+        }
       }
     }
 

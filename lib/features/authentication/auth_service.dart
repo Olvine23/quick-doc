@@ -1,5 +1,4 @@
- 
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -19,6 +18,16 @@ class AuthService {
         accessToken: gauth.accessToken, idToken: gauth.idToken);
 
     //sign in
-    return await  FirebaseAuth.instance.signInWithCredential(credential);
+    final googleUser =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    final user = googleUser.user;
+    final userData = {
+      'displayName': user!.displayName,
+      'email': user.email,
+      'photoUrl': user.photoURL,
+    };
+
+    await FirebaseFirestore.instance.collection('appusers').doc(user.uid).set(userData);
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

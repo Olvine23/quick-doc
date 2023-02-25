@@ -73,7 +73,7 @@ class _DaktariDetailsScreenState extends State<DaktariDetailsScreen> {
 
                     // Add the appointment to the database
                     FirebaseFirestore.instance
-                        .collection('appointmentsing')
+                        .collection('doctorappointment')
                         .add({
                       'daktariId': appointment.doctor.id,
                       'dateTime': Timestamp.fromDate(appointment.dateTime),

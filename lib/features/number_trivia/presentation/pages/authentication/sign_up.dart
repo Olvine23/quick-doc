@@ -49,13 +49,15 @@ class _RegisterState extends State<Register> {
           // ignore: deprecated_member_use
           await user.updateProfile(displayName: nameController.text);
         }
-        showDialog(
+        if(mounted) {
+          showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text("Hurray"),
           );
         });
+        }
 
         Navigator.pop(context);
       } else {
