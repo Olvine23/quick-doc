@@ -26,13 +26,20 @@ class UserIntro extends StatelessWidget {
         ),
         Row(
           children: [
-            user!.photoURL != null
-                ? CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/vid.png'),
-                  )
-                : CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/vid.png'),
-                  ),
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.favorite_outline_rounded,
+                  size: 30,
+                  color: Colors.red,
+                )),
+            // user!.photoURL != null
+            //     ? CircleAvatar(
+            //         backgroundImage: AssetImage('assets/images/vid.png'),
+            //       )
+            //     : CircleAvatar(
+            //         backgroundImage: AssetImage('assets/images/vid.png'),
+            //       ),
             SizedBox(
               width: 10,
             ),

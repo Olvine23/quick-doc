@@ -36,7 +36,7 @@ class _Chat_ScreenState extends State<Chat_Screen> {
 
     Future<void> addUser() {
       // Call the user's CollectionReference to add a new user
-      return users
+       return users
           .add({
             'name': nameController.text, // John Doe
             'company': companyController.text, // Stokes and Sons
@@ -70,14 +70,17 @@ class _Chat_ScreenState extends State<Chat_Screen> {
                   nameController.clear();
                   phoneController.clear();
                   companyController.clear();
-                   
                 },
                 child: Text("Add")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                    return InfoUser();
+                    return DoctorDetailPage(
+                        name: "name",
+                        profession: "profession,",
+                        imageUrl:
+                            "https://cdn.pixabay.com/photo/2017/03/14/03/20/woman-2141808_960_720.jpg");
                   })));
                 },
                 child: Text("Go"))

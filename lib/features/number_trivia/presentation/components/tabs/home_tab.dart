@@ -73,9 +73,12 @@ class HomeTab extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Title_row(),
+            Title_row(
+              leading: 'View All',
+              title: 'Upcoming Appointment',
+            ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             AppointmentCard(
               onTap: () {
@@ -85,15 +88,9 @@ class HomeTab extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
-            Text(
-              'Top Doctors',
-              style: TextStyle(
-                color: Color(CustomColors.header01),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Title_row(title: 'Top Doctors', leading: 'See All'),
             const SizedBox(
               height: 20,
             ),

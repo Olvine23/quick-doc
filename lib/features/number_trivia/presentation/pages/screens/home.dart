@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
       ),
       DaktarisScreen(),
       // Dummy(),
-      InfoUser(),
+     DoctorDetailPage(name: "name", profession: "profession", imageUrl:""),
       AppointmentsPage()
     ];
 

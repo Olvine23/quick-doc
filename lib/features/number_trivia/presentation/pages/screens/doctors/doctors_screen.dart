@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
 import '../../schedule/models/doctor.dart';
 import 'daktari_details.dart';
- 
 
 class DaktarisScreen extends StatelessWidget {
-
   DaktarisScreen({super.key});
   final List<Daktari> daktaris = [
-    Daktari(id: '1', name: 'Dr. John Doe', specialty: 'Dermatology', availableTimes: [
-      TimeOfDay(hour: 8, minute: 0),
-      TimeOfDay(hour: 9, minute: 0),
-      TimeOfDay(hour: 10, minute: 0),
-    ]),
-    Daktari(id: '2', name: 'Dr. Jane Smith', specialty: 'Pediatrics', availableTimes: [
-      TimeOfDay(hour: 10, minute: 0),
-      TimeOfDay(hour: 11, minute: 0),
-      TimeOfDay(hour: 12, minute: 0),
-    ]),
-  ];
-
-
+    
 
     
+    Daktari(
+        id: '1',
+        firstName: 'Dr. John',
+        lastName: 'Doe',
+        specialty: 'Dermatology',
+        availableTimes: [
+          TimeOfDay(hour: 8, minute: 0),
+          TimeOfDay(hour: 9, minute: 0),
+          TimeOfDay(hour: 10, minute: 0),
+        ]),
+    Daktari(
+        id: '2',
+        firstName: 'Dr. Jane',
+        lastName: 'Smith',
+        specialty: 'Pediatrics',
+        availableTimes: [
+          TimeOfDay(hour: 10, minute: 0),
+          TimeOfDay(hour: 11, minute: 0),
+          TimeOfDay(hour: 12, minute: 0),
+        ]),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +41,14 @@ class DaktarisScreen extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final doctor = daktaris[index];
           return ListTile(
-            title: Text(doctor.name),
+            title: Text(doctor.firstName),
             subtitle: Text(doctor.specialty),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DaktariDetailsScreen(daktari: doctor  )),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        DaktariDetailsScreen(daktari: doctor)),
               );
             },
           );

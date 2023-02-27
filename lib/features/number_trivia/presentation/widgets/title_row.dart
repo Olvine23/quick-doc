@@ -5,8 +5,12 @@ import 'package:test/features/number_trivia/presentation/pages/schedule/appointm
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
 
 class Title_row extends StatelessWidget {
+  final String title;
+  final String leading;
   const Title_row({
     Key? key,
+    required this.title,
+    required this.leading,
   }) : super(key: key);
 
   @override
@@ -15,12 +19,12 @@ class Title_row extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Upcoming Appointment',
+         title,
           style: kTitleStyle,
         ),
         TextButton(
           child: Text(
-            'See All',
+           leading,
             style: TextStyle(
               color: Color(CustomColors.yellow01),
               fontWeight: FontWeight.bold,

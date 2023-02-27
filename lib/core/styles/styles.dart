@@ -13,7 +13,7 @@ TextStyle kFilterStyle = TextStyle(
   color: Color(CustomColors.bg02),
   fontWeight: FontWeight.w500,
 );
-
+TextStyle kTitleStyleWithWhiteColor = TextStyle(color: Colors.white);
 TextStyle kHeadStyle = TextStyle(
     fontWeight: FontWeight.w900,
     fontSize: 20,
