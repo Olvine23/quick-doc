@@ -191,7 +191,7 @@ class _AppointmentTestPageState extends State<AppointmentTestPage> {
                                     _selectedTime!.hour,
                                     _selectedTime!.minute),
                                 userId: FirebaseAuth.instance.currentUser!.uid);
-      
+
                             FirebaseFirestore.instance
                                 .collection('doctorappointment')
                                 .add({
@@ -202,14 +202,15 @@ class _AppointmentTestPageState extends State<AppointmentTestPage> {
                               'patient': user!.displayName,
                               'doctor': appointment.doctor.firstName
                             });
-      
+
                             showDialog(
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
                                     title: Column(
                                       children: [
-                                        Lottie.asset('assets/success.json'),
+                                        Lottie.asset('assets/success.json',
+                                            repeat: false),
                                         Text("Booked")
                                       ],
                                     ),

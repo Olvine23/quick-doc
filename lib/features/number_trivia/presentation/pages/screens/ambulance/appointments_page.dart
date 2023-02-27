@@ -9,11 +9,11 @@ class AppointmentsPage extends StatelessWidget {
 
   final Stream<QuerySnapshot> appointments =
       FirebaseFirestore.instance.collection('doctorappointment').snapshots();
-@override
-void dispose(){
-  
-   FirebaseAuth.instance.signOut();
-}
+  @override
+  void dispose() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +39,7 @@ void dispose(){
               if (snapshot.hasData) {
                 final data = snapshot.requireData;
                 return ListView.builder(
+                    physics: ScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: data.size,
                     itemBuilder: ((context, index) {
