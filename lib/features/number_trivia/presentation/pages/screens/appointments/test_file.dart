@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -181,7 +184,7 @@ class _AppointmentTestPageState extends State<AppointmentTestPage> {
                 child: ElevatedButton(
                     child: Text('Submit'),
                     onPressed: _selectedTime != null && _selectedDate != null
-                        ? () {
+                        ? () async {
                             final appointment = Appointment(
                                 doctor: widget.daktari,
                                 dateTime: DateTime(
@@ -191,6 +194,45 @@ class _AppointmentTestPageState extends State<AppointmentTestPage> {
                                     _selectedTime!.hour,
                                     _selectedTime!.minute),
                                 userId: FirebaseAuth.instance.currentUser!.uid);
+
+                            Future<bool> instantNotify() async {
+                              final AwesomeNotifications awesomeNotifications =
+                                  AwesomeNotifications();
+                              return awesomeNotifications.createNotification(
+                                  content: NotificationContent(
+                                      title: "Quick Doc",
+                                      body:
+                                          "Your appointment with Dr.${widget.daktari.firstName}  ${widget.daktari.lastName} is scheduled for ${DateFormat('EEE, MMM d, h:mm a').format(appointment.dateTime)}",
+                                      bigPicture:
+                                          'asset://assets/images/vid.png',
+                                      notificationLayout:
+                                          NotificationLayout.BigText,
+                                      id: Random().nextInt(100),
+                                      wakeUpScreen: true,
+                                      channelKey: 'instant_notification'));
+                            }
+
+                            Future<bool> schedulenotify() async {
+                              final AwesomeNotifications awesomeNotifications =
+                                  AwesomeNotifications();
+
+                              return await awesomeNotifications.createNotification(
+                                  schedule: NotificationCalendar(
+                                      day: _selectedDate!.day,
+                                      month: _selectedDate!.month,
+                                      year: _selectedDate!.year,
+                                      hour: _selectedTime!.hour,
+                                      minute: _selectedTime!.minute),
+                                  content: NotificationContent(
+                                      id: Random().nextInt(100),
+                                      title: "Quick Doc",
+                                      body:
+                                          "Your appointment with Dr.${appointment.doctor.firstName}  ${appointment.doctor.lastName} is due. Please confirm availabilty",
+                                      wakeUpScreen: true,
+                                      notificationLayout:
+                                          NotificationLayout.BigText,
+                                      channelKey: 'scheduled_notification'));
+                            }
 
                             FirebaseFirestore.instance
                                 .collection('doctorappointment')
@@ -202,7 +244,8 @@ class _AppointmentTestPageState extends State<AppointmentTestPage> {
                               'patient': user!.displayName,
                               'doctor': appointment.doctor.firstName
                             });
-
+                            instantNotify();
+                            schedulenotify();
                             showDialog(
                                 context: context,
                                 builder: (context) {
