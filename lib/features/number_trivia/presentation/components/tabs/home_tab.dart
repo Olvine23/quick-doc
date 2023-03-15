@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
+import 'package:test/core/styles/styles.dart';
 import 'package:test/features/number_trivia/presentation/pages/welcome/my_books.dart';
 import 'package:test/features/number_trivia/presentation/widgets/category_icons.dart';
 import 'package:test/features/number_trivia/presentation/widgets/search_input.dart';
@@ -36,13 +38,56 @@ List<Map> doctors = [
   }
 ];
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   final void Function() onPressedScheduleCard;
 
   const HomeTab({
     Key? key,
     required this.onPressedScheduleCard,
   }) : super(key: key);
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  @override
+  void initState() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Allow Notifications"),
+                content:
+                    Text("We would like to send notifications to your device"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Dont Allow",
+                        style: kTitleStyle,
+                      )),
+                  TextButton(
+                      onPressed: () {
+                        AwesomeNotifications()
+                            .requestPermissionToSendNotifications()
+                            .then((_) => Navigator.pop(context));
+                      },
+                      child: Text(
+                        "Allow",
+                        style: kTitleStyle,
+                      ))
+                ],
+              );
+            });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +126,8 @@ class HomeTab extends StatelessWidget {
               height: 10,
             ),
             AppointmentCard(
+              title: "Olly",
+              subtitle: "Kuuu",
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return MyBooks();

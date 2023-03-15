@@ -17,6 +17,8 @@ class Student {
 }
 
 class AppointmentCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
   final void Function() onTap;
   String? individ;
   getDetails() async {
@@ -34,6 +36,8 @@ class AppointmentCard extends StatelessWidget {
   AppointmentCard({
     Key? key,
     required this.onTap,
+    required this.title,
+    required this.subtitle,
   }) : super(key: key);
 
   // @override
@@ -82,31 +86,16 @@ class AppointmentCard extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ValueListenableBuilder(
-                                      valueListenable:
-                                          Hive.box<Books>('booksBox')
-                                              .listenable(),
-                                      builder: ((context, Box<Books> books, _) {
-                                        var docc =
-                                            books.getAt(0)?.doc.toString();
-                                        if (books.values.isEmpty) {
-                                          return Text("data");
-                                        } else
-                                          // ignore: avoid_print
-                                          print(docc);
+                                  Text(title,
+                                      style: TextStyle(color: Colors.white)),
 
-                                        print(books.getAt(0)?.doc!);
-                                        return Text(docc.toString(),
-                                            style:
-                                                TextStyle(color: Colors.white));
-                                      })),
                                   // Text('Dr. Kamau Mwitu',
                                   //     style: TextStyle(color: Colors.white)),
                                   SizedBox(
                                     height: 2,
                                   ),
                                   Text(
-                                    doccie!,
+                                    subtitle,
                                     // "James",
                                     style: TextStyle(
                                         color: Color(CustomColors.text01)),

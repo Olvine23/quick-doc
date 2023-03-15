@@ -229,9 +229,11 @@ class _AppointmentTestPageState extends State<AppointmentTestPage> {
                                       body:
                                           "Your appointment with Dr.${appointment.doctor.firstName}  ${appointment.doctor.lastName} is due. Please confirm availabilty",
                                       wakeUpScreen: true,
+                                      largeIcon:
+                                          'asset://assets/quickdoc.png',
                                       notificationLayout:
                                           NotificationLayout.BigText,
-                                      channelKey: 'scheduled_notification'));
+                                      channelKey: 'the_notification'));
                             }
 
                             FirebaseFirestore.instance

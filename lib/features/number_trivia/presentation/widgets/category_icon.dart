@@ -3,6 +3,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:test/core/styles/colors.dart';
+import 'package:test/features/number_trivia/presentation/pages/screens/ambulance/pending_appointments.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/another.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/hospitals/hospital_screen.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/pills/pills_page.dart';
@@ -23,17 +24,7 @@ class CategoryIcon extends StatelessWidget {
     if (text == "Critical") {
       return InkWell(
         splashColor: Color(CustomColors.bg01),
-        onTap: () {
-          if (text == "Pill") {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return MyBooks();
-            }));
-          } else if (text == "Hospital") {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return TestLaunch();
-            }));
-          }
-        },
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
@@ -81,6 +72,10 @@ class CategoryIcon extends StatelessWidget {
           } else if (text == "Hospital") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return HospitalScreen();
+            }));
+          } else if (text == 'Ambulance') {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PendingDrugs();
             }));
           }
         },

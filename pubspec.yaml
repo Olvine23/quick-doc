@@ -66,6 +66,7 @@ dependencies:
   avatar_glow:
   latlong2:
   flutter_map:
+  workmanager:
   flash:
   
   

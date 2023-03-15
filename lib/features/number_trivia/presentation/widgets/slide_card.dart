@@ -23,7 +23,7 @@ class SlideCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: AppointmentCard(
-                  onTap: onPressedScheduleCard,
+                  onTap: onPressedScheduleCard, title: '', subtitle: '',
                 ),
               ),
             );

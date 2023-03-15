@@ -23,7 +23,7 @@
 </intent>
 </queries>
    <application
-        android:label="test"
+        android:label="Quick Doc"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
          

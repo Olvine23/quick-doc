@@ -108,7 +108,6 @@ class _MyBooksState extends State<MyBooks> {
                   child: SafeArea(
                 child: Column(
                   children: [
-                     
                     ListView.builder(
                       physics: ScrollPhysics(),
                       shrinkWrap: true,
@@ -148,18 +147,6 @@ class _MyBooksState extends State<MyBooks> {
                         );
                       },
                     ),
-                    ElevatedButton.icon(
-                        onPressed: () => Notify.instantNotify(),
-                        icon: Icon(Icons.notification_add),
-                        label: Text("Add Notificaion")),
-                    ElevatedButton.icon(
-                        onPressed: () => Notify.schedulenotify(),
-                        icon: Icon(Icons.notification_add),
-                        label: Text("Add Notificaion")),
-                    ElevatedButton.icon(
-                        onPressed: _showDate,
-                        icon: Icon(Icons.notification_add),
-                        label: Text("Pick Date")),
                     Text(showText)
                   ],
                 ),
@@ -179,7 +166,7 @@ class _MyBooksState extends State<MyBooks> {
         builder: (context) {
           return AlertDialog(
             insetPadding: EdgeInsets.all(8.0),
-            title: const Text("Schedule Appointment"),
+            title: const Text("Add a drug"),
             content: Container(
               width: MediaQuery.of(context).size.width,
               child: Form(
@@ -198,7 +185,7 @@ class _MyBooksState extends State<MyBooks> {
                       decoration: InputDecoration(
                           errorText: _validate ? 'Value Can\'t Be Empty' : null,
                           icon: Icon(Icons.person_add),
-                          hintText: 'Doc Name'),
+                          hintText: 'Drug Name'),
                     ),
                     TextFormField(
                       validator: ((value) {
