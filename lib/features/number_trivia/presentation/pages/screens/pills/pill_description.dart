@@ -243,7 +243,7 @@ class _PillDescriptionState extends State<PillDescription> {
                                 }
 
                                 FirebaseFirestore.instance
-                                    .collection('scheduled_medications')
+                                    .collection('scheduled_medications_update')
                                     .add({
                                   'drugName': _med.text,
                                   'userId': user!.uid,

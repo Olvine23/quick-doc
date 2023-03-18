@@ -21,6 +21,7 @@ import 'package:test/features/number_trivia/presentation/pages/schedule/schedule
 import 'package:path_provider/path_provider.dart';
 import 'package:test/features/number_trivia/presentation/pages/screens/camera_screen.dart';
 import 'package:workmanager/workmanager.dart';
+import 'features/number_trivia/presentation/pages/schedule/models/drug.dart';
 import 'features/number_trivia/presentation/routes/routes.dart';
 
 Box? box;
@@ -34,40 +35,37 @@ const fetchBackground = "fetchBackground";
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
     Future<void> _handleBackgroundAction(ReceivedAction received) async {
-
       // Your background action handle
       AwesomeNotifications().initialize('resource://drawable/doctor', [
-      // NotificationChannel(
-      //   defaultColor: Color(0xFF9D50DD),
-      //   ledColor: Colors.white,
-      //   channelGroupKey: 'reminders',
-      //   channelName: 'Basic instant notification',
-      //   channelKey: 'instant_notification',
-      //   channelDescription: "Notification channel triggers notif",
-      //   channelShowBadge: true,
-      //   importance: NotificationImportance.Max,
-      //   soundSource: 'resource://raw/res_custom_notification',
-      // ),
-      // NotificationChannel(
-      //     channelKey: 'scheduled_notification',
-      //     channelName: 'Scheduled Notification',
-      //     channelDescription: 'This one is scheduled',
-      //     ledColor: Colors.white,
-      //     defaultColor: Color(0xFF9D50DD)),
-      NotificationChannel(
-        defaultColor: Color(0xFF9D50DD),
-        ledColor: Colors.white,
-        channelGroupKey: 'reminders',
-        channelName: 'The instant notification',
-        channelKey: 'the_notification',
-        channelDescription: "Notification channel triggers notif",
-        channelShowBadge: true,
-        importance: NotificationImportance.Max,
-        soundSource: 'resource://raw/res_custom_notification',
-      ),
-    ]);
-
-
+        // NotificationChannel(
+        //   defaultColor: Color(0xFF9D50DD),
+        //   ledColor: Colors.white,
+        //   channelGroupKey: 'reminders',
+        //   channelName: 'Basic instant notification',
+        //   channelKey: 'instant_notification',
+        //   channelDescription: "Notification channel triggers notif",
+        //   channelShowBadge: true,
+        //   importance: NotificationImportance.Max,
+        //   soundSource: 'resource://raw/res_custom_notification',
+        // ),
+        // NotificationChannel(
+        //     channelKey: 'scheduled_notification',
+        //     channelName: 'Scheduled Notification',
+        //     channelDescription: 'This one is scheduled',
+        //     ledColor: Colors.white,
+        //     defaultColor: Color(0xFF9D50DD)),
+        NotificationChannel(
+          defaultColor: Color(0xFF9D50DD),
+          ledColor: Colors.white,
+          channelGroupKey: 'reminders',
+          channelName: 'The instant notification',
+          channelKey: 'the_notification',
+          channelDescription: "Notification channel triggers notif",
+          channelShowBadge: true,
+          importance: NotificationImportance.Max,
+          soundSource: 'resource://raw/res_custom_notification',
+        ),
+      ]);
     }
 
     Future<void> onSilentActionHandle(ReceivedAction received) async {
@@ -153,7 +151,7 @@ Future<void> main() async {
 
   Hive.registerAdapter(BooksAdapter());
   box = await Hive.openBox<Books>('booksBox');
-
+  Hive.registerAdapter(DrugAdapter());
   Hive.registerAdapter(DocsAdapter());
   await Firebase.initializeApp();
 
@@ -228,6 +226,12 @@ class _MyAppState extends State<MyApp> {
               // darkTheme: ThemeData.dark(),
               // themeMode: ThemeMode.system,
               theme: ThemeData(
+                floatingActionButtonTheme: FloatingActionButtonThemeData(
+                  backgroundColor: Palette.kToDark,
+                  foregroundColor: Colors.white,
+                  hoverColor: Colors.redAccent,
+                  splashColor: Colors.tealAccent,
+                ),
                 primarySwatch: Palette.kToDark,
                 textTheme: GoogleFonts.montserratTextTheme(
                     Theme.of(context).textTheme),

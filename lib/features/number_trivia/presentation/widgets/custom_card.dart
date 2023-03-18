@@ -7,7 +7,7 @@ class CustomCard extends StatelessWidget {
   final String color;
   final String name;
   final String image;
-  final int number;
+  final String number;
   final String valid;
 
   CustomCard(
@@ -41,7 +41,6 @@ class CustomCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
-                  
                   children: <Widget>[
                     CircleAvatar(
                       backgroundImage: AssetImage('assets/images/doctor.png'),
@@ -50,6 +49,8 @@ class CustomCard extends StatelessWidget {
                       width: 10,
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(name, style: kTitleStyleWithWhiteColor),
                         SizedBox(
@@ -57,7 +58,7 @@ class CustomCard extends StatelessWidget {
                         ),
                         Text(
                           number.toString(),
-                          style: kTitleStyleWithWhiteColor,
+                          style: kTitleStyleWithWhiteColorLight,
                         )
                       ],
                     ),
